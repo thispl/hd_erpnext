@@ -4,7 +4,9 @@
 cur_frm.add_fetch('employee', 'company', 'company');
 cur_frm.add_fetch('employee', 'employee_name', 'employee_name');
 
+
 cur_frm.cscript.onload = function(doc,cdt,cdn){
+	$(".grid-add-row").hide();
 	if(!doc.status)
 		set_multiple(cdt,cdn,{status:'Draft'});
 	if(doc.amended_from && doc.__islocal) {
@@ -13,7 +15,7 @@ cur_frm.cscript.onload = function(doc,cdt,cdn){
 }
 
 cur_frm.cscript.onload_post_render = function(doc,cdt,cdn){
-	if(doc.__islocal && doc.employee==frappe.defaults.get_user_default("Employee")) {
+	if(doc.__islocal) {
 		cur_frm.set_value("employee", "");
 		cur_frm.set_value("employee_name", "")
 	}

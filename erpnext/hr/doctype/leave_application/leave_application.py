@@ -202,7 +202,7 @@ class LeaveApplication(Document):
             select
                 name, leave_type, posting_date, from_date, to_date, total_leave_days, half_day_date
             from `tabLeave Application`
-            where employee = %(employee)s and docstatus < 2 and status in ("Open", "Approved")
+            where employee = %(employee)s and docstatus < 2 and status in ("Open","Applied","Approved")
             and to_date >= %(from_date)s and from_date <= %(to_date)s
             and name != %(name)s""", {
                 "employee": self.employee,
@@ -277,29 +277,34 @@ class LeaveApplication(Document):
 
     def validate_policy(self):
         wo_leave = False
-        preday = add_days(self.from_date,-1)
-        while is_holiday(self.employee,preday):
-            preday = add_days(preday,-1)   
-        post_leave_record = frappe.db.sql("""select half_day,from_date_session,to_date_session,leave_type from `tabLeave Application`
-        where employee = %s and %s between from_date and to_date
-        and docstatus = 1 and status='Approved'""", (self.employee, preday), as_dict=True)
-        if post_leave_record:
-            for o in post_leave_record:
-                if o.from_date_session == 'Full Day' or o.from_date_session == 'Second Half':
-                    if self.from_date_session == 'Full Day' or self.from_date_session == 'Second Half':
-                        wo_leave = True
-                        wo_leave_type = o.leave_type
-            if wo_leave and wo_leave_type == self.leave_type:
-                frappe.throw(_("Two leaves of same type cannot be applied when Holidays occurs in between").format(wo_leave),
-                    LeavePolicyViolationError)
+        # preday = previous_day = add_days(self.from_date,-1)
+        # while is_holiday(self.employee,preday):
+        #     previous_day = add_days(preday,-1) 
+        # frappe.errprint(preday) 
+        # frappe.errprint(previous_day)     
+        # if not previous_day == preday:
+        #     post_leave_record = frappe.db.sql("""select half_day,from_date_session,to_date_session,leave_type from `tabLeave Application`
+        #     where employee = %s and %s between from_date and to_date
+        #     and docstatus = 1 and status='Approved'""", (self.employee, previous_day), as_dict=True)
+        #     frappe.errprint(preday)
+        #     frappe.errprint(post_leave_record)
+        #     if post_leave_record:
+        #         for o in post_leave_record:
+        #             if o.from_date_session == 'Full Day' or o.from_date_session == 'Second Half':
+        #                 if self.from_date_session == 'Full Day' or self.from_date_session == 'Second Half':
+        #                     wo_leave = True
+        #                     wo_leave_type = o.leave_type
+        #         if wo_leave and wo_leave_type == self.leave_type:
+        #             frappe.throw(_("Two leaves of same type cannot be applied when Holidays occurs in between").format(wo_leave),
+        #                 LeavePolicyViolationError)
 
-        # leave_record = frappe.db.sql("""select leave_type from `tabLeave Application`
-        #     where employee = %s and %s between from_date and to_date""", (self.employee, add_days(self.from_date,-1)), as_dict=True)
-        # if leave_record and not self.half_day:
-        #     leave_type = [x.leave_type for x in leave_record]     
-        #     if leave_type and leave_type[0] != self.leave_type:
-        #         frappe.throw(_("Leave of type {0} cannot be clubbed with previous {1}").format(self.leave_type,leave_type[0]),
-        #             LeavePolicyViolationError)       
+        leave_record = frappe.db.sql("""select leave_type from `tabLeave Application`
+            where employee = %s and %s between from_date and to_date""", (self.employee, add_days(self.from_date,-1)), as_dict=True)
+        if leave_record and not self.half_day:
+            leave_type = [x.leave_type for x in leave_record]     
+            if leave_type and leave_type[0] != self.leave_type:
+                frappe.throw(_("Leave of type {0} cannot be clubbed with previous {1}").format(self.leave_type,leave_type[0]),
+                    LeavePolicyViolationError)       
 
     def notify_employee(self, status):
         employee = frappe.get_doc("Employee", self.employee)

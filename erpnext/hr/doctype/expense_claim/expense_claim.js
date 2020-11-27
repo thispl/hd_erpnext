@@ -95,16 +95,16 @@ cur_frm.cscript.refresh = function(doc) {
 				entry_reference_name = "Payment Entry Reference.reference_name";
 			}
 
-			if (cint(doc.total_amount_reimbursed) > 0 && frappe.model.can_read(entry_doctype)) {
-				cur_frm.add_custom_button(__('Bank Entries'), function() {
-					frappe.route_options = {
-						party_type: "Employee",
-						party: doc.employee,
-						company: doc.company
-					};
-					frappe.set_route("List", entry_doctype);
-				}, __("View"));
-			}
+			// if (cint(doc.total_amount_reimbursed) > 0 && frappe.model.can_read(entry_doctype)) {
+			// 	cur_frm.add_custom_button(__('Bank Entries'), function() {
+			// 		frappe.route_options = {
+			// 			party_type: "Employee",
+			// 			party: doc.employee,
+			// 			company: doc.company
+			// 		};
+			// 		frappe.set_route("List", entry_doctype);
+			// 	}, __("View"));
+			// }
 			/* eslint-enable */
 		}
 	}
@@ -134,11 +134,11 @@ cur_frm.cscript.calculate_total = function(doc){
 	doc.total_sanctioned_amount = 0;
 	$.each((doc.expenses || []), function(i, d) {
 		doc.total_claimed_amount += d.claim_amount;
-		doc.total_sanctioned_amount += d.sanctioned_amount;
+		// doc.total_sanctioned_amount += d.sanctioned_amount;
 	});
 
 	refresh_field("total_claimed_amount");
-	refresh_field('total_sanctioned_amount');
+	// refresh_field('total_sanctioned_amount');
 };
 
 cur_frm.cscript.calculate_total_amount = function(doc,cdt,cdn){
@@ -162,6 +162,41 @@ erpnext.expense_claim = {
 	}
 };
 
+frappe.ui.form.on("Expense Claim Stay", {
+	
+	amount:function(frm,cdt,cdn){
+		var child = locals[cdt][cdn];
+		console.log(child.amount)
+		frappe.model.set_value(child.doctype,child.name,"approved_amount",child.amount)
+	}
+});
+frappe.ui.form.on("Expense Claim Food", {
+	
+	amount:function(frm,cdt,cdn){
+		var child = locals[cdt][cdn];
+		console.log(child.amount)
+		frappe.model.set_value(child.doctype,child.name,"approved_amount",child.amount)
+	}
+});
+
+frappe.ui.form.on("Expense Claim Conveyance", {
+	
+	amount:function(frm,cdt,cdn){
+		var child = locals[cdt][cdn];
+		console.log(child.amount)
+		frappe.model.set_value(child.doctype,child.name,"approved_amount",child.amount)
+	}
+});
+
+frappe.ui.form.on("Expense Claim Others", {
+	
+	amount:function(frm,cdt,cdn){
+		var child = locals[cdt][cdn];
+		console.log(child.amount)
+		frappe.model.set_value(child.doctype,child.name,"approved_amount",child.amount)
+	}
+});
+
 frappe.ui.form.on("Expense Claim", {
 	setup: function(frm) {
 		frm.trigger("set_query_for_cost_center");
@@ -180,25 +215,25 @@ frappe.ui.form.on("Expense Claim", {
 		});
 	},
 	refresh: function(frm) {
-		frm.trigger("toggle_fields");
+		// frm.trigger("toggle_fields");
 		
-		if(frm.doc.docstatus == 1 && frm.doc.approval_status == 'Approved') {
-			frm.add_custom_button(__('Accounting Ledger'), function() {
-				frappe.route_options = {
-					voucher_no: frm.doc.name,
-					company: frm.doc.company,
-					group_by_voucher: false
-				};
-				frappe.set_route("query-report", "General Ledger");
-			}, __("View"));
-		}
+		// if(frm.doc.docstatus == 1 && frm.doc.approval_status == 'Approved') {
+		// 	frm.add_custom_button(__('Accounting Ledger'), function() {
+		// 		frappe.route_options = {
+		// 			voucher_no: frm.doc.name,
+		// 			company: frm.doc.company,
+		// 			group_by_voucher: false
+		// 		};
+		// 		frappe.set_route("query-report", "General Ledger");
+		// 	}, __("View"));
+		// }
 
-		if (frm.doc.docstatus===1 && frm.doc.approval_status=="Approved"
-				&& (cint(frm.doc.total_amount_reimbursed) < cint(frm.doc.total_sanctioned_amount))
-				&& frappe.model.can_create("Payment Entry")) {
-			frm.add_custom_button(__('Payment'),
-				function() { frm.events.make_payment_entry(frm); }, __("Make"));
-		}
+		// if (frm.doc.docstatus===1 && frm.doc.approval_status=="Approved"
+		// 		&& (cint(frm.doc.total_amount_reimbursed) < cint(frm.doc.total_sanctioned_amount))
+		// 		&& frappe.model.can_create("Payment Entry")) {
+		// 	frm.add_custom_button(__('Payment'),
+		// 		function() { frm.events.make_payment_entry(frm); }, __("Make"));
+		// }
 	},
 	after_save: function(frm){
 		if(frm.doc.travel_management_id){
@@ -265,7 +300,7 @@ frappe.ui.form.on("Expense Claim", {
 	},
 
 	is_paid: function(frm) {
-		frm.trigger("toggle_fields");
+		// frm.trigger("toggle_fields");
 	},
 
 	toggle_fields: function(frm) {
