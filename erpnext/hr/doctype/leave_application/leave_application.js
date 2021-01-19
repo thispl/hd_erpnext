@@ -83,25 +83,25 @@ frappe.ui.form.on("Leave Application", {
         if(frm.doc.is_from_ar && frm.doc.status == "Applied"){
             frappe.set_route("query-report", "Attendance recapitulation")
         }
-        if(frm.doc.from_date){
-            frappe.call({
-                "method": "erpnext.hr.doctype.leave_application.leave_application.check_attendance",
-                args:{
-                    "emp": frm.doc.employee,
-                    "att_date": frm.doc.from_date,
-                    "l_type": frm.doc.leave_type1
-                },
-                callback: function(r){
-                    if(r.message == "Allowed"){
-                    }
-                    else{
-                        frappe.msgprint(r.message)
-                        frappe.validated = false;
+        // if(frm.doc.from_date){
+        //     frappe.call({
+        //         "method": "erpnext.hr.doctype.leave_application.leave_application.check_attendance",
+        //         args:{
+        //             "emp": frm.doc.employee,
+        //             "att_date": frm.doc.from_date,
+        //             "l_type": frm.doc.leave_type1
+        //         },
+        //         callback: function(r){
+        //             if(r.message == "Allowed"){
+        //             }
+        //             else{
+        //                 frappe.msgprint(r.message)
+        //                 frappe.validated = false;
 
-                    }
-                }
-            })
-        }
+        //             }
+        //         }
+        //     })
+        // }
     },
 
     refresh: function(frm) {

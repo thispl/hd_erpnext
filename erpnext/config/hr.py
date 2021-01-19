@@ -90,12 +90,12 @@ def get_data():
                         "name": "On Duty Application",
                         "description": _("Applications for OnDuty.")
                     },
-                    {
-                        "type": "doctype",
-                        "label": _("Tour Application"),
-                        "name": "Tour Application",
-                        "description": _("Applications for OnDuty.")
-                    },
+                    # {
+                    #     "type": "doctype",
+                    #     "label": _("Tour Application"),
+                    #     "name": "Tour Application",
+                    #     "description": _("Applications for OnDuty.")
+                    # },
                     {
                         "type": "doctype",
                         "name": "Movement Register",
@@ -117,12 +117,12 @@ def get_data():
                         "label": _("On Duty Approval"),
                         "description": _("Bulk On Duty Approval")
                     },
-                    {
-                        "type": "doctype",
-                        "name": "Tour Application Approval",
-                        "label": _("Tour Approval"),
-                        "description": _("Bulk On Duty Approval")
-                    },
+                    # {
+                    #     "type": "doctype",
+                    #     "name": "Tour Application Approval",
+                    #     "label": _("Tour Approval"),
+                    #     "description": _("Bulk On Duty Approval")
+                    # },
                     {
                         "type": "doctype",
                         "name": "Movement Register Approval",
@@ -170,7 +170,7 @@ def get_data():
                     {
                         "type": "doctype",
                         "name": "Travel Management",
-                        "label": _("Travel Management Application"),
+                        "label": _("Travel Management"),
                         "description": _("Bulk Movement Register Approval."),
                     },
                     {
@@ -469,14 +469,7 @@ def get_data():
                         "description":_("Mark Attendance for multiple employees"),
                         "hide_count": True
                     },
-                    {
-                        "label": _("Performance Management"),
-                        "type": "doctype",
-                        "name": "Appraisal",
-                        "description":_("Upload attendance from a .csv file"),
-                        "hide_count": True
-                        # "hidden": 1
-                    },
+                    
                     # {
                     #     "type": "doctype",
                     #     "name": "Attendance",
@@ -535,13 +528,13 @@ def get_data():
                         "description": _("Applications for OnDuty."),
                         "hide_count": True
                     },
-                    {
-                        "type": "doctype",
-                        "label": _("Tour Application"),
-                        "name": "Tour Application",
-                        "description": _("Applications for OnDuty."),
-                        "hide_count": True
-                    },
+                    # {
+                    #     "type": "doctype",
+                    #     "label": _("Tour Application"),
+                    #     "name": "Tour Application",
+                    #     "description": _("Applications for OnDuty."),
+                    #     "hide_count": True
+                    # },
                     
                     {
                         "type": "doctype",
@@ -560,12 +553,12 @@ def get_data():
                         "label": _("On Duty Approval"),
                         "description": _("Bulk On Duty Approval")
                     },
-                    {
-                        "type": "doctype",
-                        "name": "Tour Application Approval",
-                        "label": _("Tour Approval"),
-                        "description": _("Bulk On Duty Approval")
-                    },
+                    # {
+                    #     "type": "doctype",
+                    #     "name": "Tour Application Approval",
+                    #     "label": _("Tour Approval"),
+                    #     "description": _("Bulk On Duty Approval")
+                    # },
                     {
                         "type": "doctype",
                         "name": "Movement Register Approval",
@@ -612,43 +605,51 @@ def get_data():
 
                 ]
             },
-            # {
-            #     "label": _("Travel Management"),
-            #     "items": [
-            #         {
-            #             "type": "doctype",
-            #             "name": "Travel Management",
-            #             "description": _("Bulk Movement Register Approval."),
-            #         },
-            #         {
-            #             "type": "doctype",
-            #             "name": "Travel Management Approval",
-            #             "description": _("Bulk Movement Register Approval."),
-            #         },
-            #         {
-            #             "type": "doctype",
-            #             "name": "Expense Claim",
-            #             "description": _("Claims for company expense."),
-            #         },
-            #         {
-            #             "type": "doctype",
-            #             "name": "Expense Claim Approval",
-            #             "label": _("Expense Claim Approval"),
-            #             "description": _("Bulk Expense Claim Approval")
-            #         },
-            #     ]
-            # },
+            {
+                "label": _("Travel Management"),
+                "items": [
+                    {
+                        "type": "doctype",
+                        "name": "Travel Management",
+                        "description": _("Bulk Movement Register Approval."),
+                    },
+                    {
+                        "type": "doctype",
+                        "name": "Travel Management Approval",
+                        "description": _("Bulk Movement Register Approval."),
+                    },
+                    {
+                        "type": "doctype",
+                        "name": "Expense Claim",
+                        "description": _("Claims for company expense."),
+                    },
+                    {
+                        "type": "doctype",
+                        "name": "Expense Claim Approval",
+                        "label": _("Expense Claim Approval"),
+                        "description": _("Bulk Expense Claim Approval")
+                    },
+                ]
+            },
             {
 
                 "label": _("Annual Appraisal (PMS)"),
                 "items": [
                     # {
+                    #     "label": _("Performance Management"),
                     #     "type": "doctype",
-                    #     "name": "PM Merit Increase",
-                    #     "label":_("Merit Increase (Annexure) - 2019"),
-                    #     "description": _("Performance Management."),
+                    #     "name": "Appraisal",
+                    #     "description":_("Upload attendance from a .csv file"),
                     #     "hide_count": True
+                    #     # "hidden": 1
                     # },
+                    {
+                        "type": "doctype",
+                        "name": "PM Merit Increase",
+                        "label":_("Merit Increase (Annexure) - 2020"),
+                        "description": _("Performance Management."),
+                        "hide_count": True
+                    },
                     # {
                     #     "type": "doctype",
                     #     "name": "Individual Performance",
@@ -659,7 +660,7 @@ def get_data():
                     # {
                     #     "type": "doctype",
                     #     "name": "Performance Management Self",
-                    #     "label":_("Performance Management System - Self & Merit Increase 2019"),
+                    #     "label":_("Performance Management System (2019) - Self"),
                     #     "description": _("Performance Management."),
                     #     "hide_count": True
                     # }
@@ -714,6 +715,7 @@ def get_data():
             # 		},
             # 	]
             # },
+            #Non-Management Appraisal
             # {
             # 	"label": _("Appraisals"),
             # 	"items": [
@@ -722,16 +724,16 @@ def get_data():
             # 			"name": "Appraisal",
             # 			"description": _("Performance appraisal."),
             # 		},
-            # 		{
-            # 			"type": "doctype",
-            # 			"name": "Appraisal Template",
-            # 			"description": _("Template for performance appraisals.")
-            # 		},
-            # 		{
-            # 			"type": "page",
-            # 			"name": "team-updates",
-            # 			"label": _("Team Updates")
-            # 		},
+            # 		# {
+            # 		# 	"type": "doctype",
+            # 		# 	"name": "Appraisal Template",
+            # 		# 	"description": _("Template for performance appraisals.")
+            # 		# },
+            # 		# {
+            # 		# 	"type": "page",
+            # 		# 	"name": "team-updates",
+            # 		# 	"label": _("Team Updates")
+            # 		# },
             # 	]
             # },
             # {
@@ -872,96 +874,84 @@ def get_data():
 
                 ]
             },
-            # {
-            # 	"label": _("Help"),
-            # 	"icon": "fa fa-facetime-video",
-            # 	"items": [
-            # 		{
-            # 			"type": "help",
-            # 			"label": _("Setting up Employees"),
-            # 			"youtube_id": "USfIUdZlUhw"
-            # 		},
-            # 		{
-            # 			"type": "help",
-            # 			"label": _("Leave Management"),
-            # 			"youtube_id": "fc0p_AXebc8"
-            # 		},
-            # 		{
-            # 			"type": "help",
-            # 			"label": _("Expense Claims"),
-            # 			"youtube_id": "5SZHJF--ZFY"
-            # 		},
-            # 		{
-            # 			"type": "help",
-            # 			"label": _("Processing Payroll"),
-            # 			"youtube_id": "apgE-f25Rm0"
-            # 		},
-            # 	]
-            # }
         ]
         
-        merit_viewer_ecode = frappe.get_value("Employee",{'user_id':frappe.session.user},'employee')
-        merit_viewer = frappe.db.exists("Performance Management Calibration",{'employee_code':merit_viewer_ecode})
-        if merit_viewer:  
-            items = columns[2]['items']
+        # merit_viewer_ecode = frappe.get_value("Employee",{'user_id':frappe.session.user},'employee')
+        # merit_viewer = frappe.db.exists("Performance Management Calibration",{'employee_code':merit_viewer_ecode})
+        # if merit_viewer:  
+        #     items = columns[3]['items']
+        #     item = {}
+        #     item.update({
+        #         "type": "doctype",
+        #         "name": "PM Merit Increase",
+        #         "label":_("Merit Increase (Annexure) - 2019"),
+        #         "description": _("Performance Management."),
+        #         "hide_count": True
+        #     })
+        #     items.append(item)
+        #PM Permissions starts  
+        employee = frappe.db.exists("Employee", {"user_id":frappe.session.user,"pms_on_hold": "0","category":"Management Staff","status":"Active"})
+        if employee:  
+            items = columns[3]['items']
             item = {}
             item.update({
                 "type": "doctype",
-                "name": "PM Merit Increase",
-                "label":_("Merit Increase (Annexure) - 2019"),
+                "name": "Performance Management Self",
+                "label":_("Performance Management System (2019) - Self"),
+                "description": _("Performance Management."),
+                "hide_count": True
+            })
+            items.append(item) 
+             
+        manager = frappe.get_doc("User", frappe.session.user).get("roles",{"role": "One Above Manager"})
+        if manager:  
+            items = columns[3]['items']
+            item = {}
+            item.update({
+                "type": "doctype",
+                "name": "Performance Management Manager",
+                "label":_("Performance Management System (2019) - Manager"),
                 "description": _("Performance Management."),
                 "hide_count": True
             })
             items.append(item)
-        # manager = frappe.get_doc("User", frappe.session.user).get("roles",{"role": "One Above Manager"})
-        # if manager:  
-        #     items = columns[2]['items']
-        #     item = {}
-        #     item.update({
-        #         "type": "doctype",
-        #         "name": "Performance Management Manager",
-        #         "label":_("Performance Management System - Manager"),
-        #         "description": _("Performance Management."),
-        #         "hide_count": True
-        #     })
-        #     items.append(item)
 
-        # hod = frappe.get_doc("User", frappe.session.user).get("roles",{"role": "HOD"})
-        # if hod:    
-        #     items = columns[2]['items']
-        #     item = {}
-        #     item.update({
-        #         "type": "doctype",
-        #         "name": "Performance Management HOD",
-        #         "label":_("Performance Management System - HOD"),
-        #         "description": _("Performance Management."),
-        #         "hide_count": True
-        #     })
-        #     items.append(item)
+        hod = frappe.get_doc("User", frappe.session.user).get("roles",{"role": "HOD"})
+        if hod:    
+            items = columns[3]['items']
+            item = {}
+            item.update({
+                "type": "doctype",
+                "name": "Performance Management HOD",
+                "label":_("Performance Management System (2019) - HOD"),
+                "description": _("Performance Management."),
+                "hide_count": True
+            })
+            items.append(item)
 
-        # reviewer = frappe.get_doc("User", frappe.session.user).get("roles",{"role": "Reviewer"})
-        # if reviewer:    
-        #     items = columns[2]['items']
-        #     item = {}
-        #     item.update({
-        #         "type": "doctype",
-        #         "name": "Performance Management Reviewer",
-        #         "label":_("Performance Management System - Principle Reviewer"),
-        #         "description": _("Performance Management."),
-        #         "hide_count": True
-        #     })
-        #     items.append(item)
-            # items = columns[2]['items']
-            # item = {}
-            # item.update({
-            #     "type": "doctype",
-            #     "name": "Appraisal",
-            #     "label":_("Non-Management PMS- Principle Reviewer"),
-            #     "description": _("Non-Management PMS"),
-            #     "hide_count": True
-            # })
-            # items.append(item)       
-        
+        reviewer = frappe.get_doc("User", frappe.session.user).get("roles",{"role": "Reviewer"})
+        if reviewer:    
+            items = columns[3]['items']
+            item = {}
+            item.update({
+                "type": "doctype",
+                "name": "Performance Management Reviewer",
+                "label":_("Performance Management System (2019) - Principle Reviewer"),
+                "description": _("Performance Management."),
+                "hide_count": True
+            })
+            items.append(item)
+            items = columns[2]['items']
+            item = {}
+            item.update({
+                "type": "doctype",
+                "name": "Appraisal",
+                "label":_("Non-Management PMS- Principle Reviewer"),
+                "description": _("Non-Management PMS"),
+                "hide_count": True
+            })
+            items.append(item)       
+        #PM Permissions ends
         stu = frappe.get_doc("User", frappe.session.user).get("roles",{"role": "Shift Tool User"})
         if stu:    
             items = columns[0]['items']
